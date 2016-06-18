@@ -130,9 +130,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\AspnetIdentitySample\AspnetIdentitySample.csproj">
       <Project>{52b084d8-16c8-4d3c-bac0-bc727d95f9e5}</Project>
       <Name>AspnetIdentitySample</Name>

@@ -1,16 +1,24 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AspnetIdentitySample.Controllers;
-using System.Web.Mvc;
-using System.Collections.Specialized;
-using System.Globalization;
-using AspnetIdentitySample.Models;
-
-namespace AspnetIdentityTest
+﻿namespace AspnetIdentityTest
 {
+    using System;
+    using System.Web.Mvc;
+    using System.Collections.Specialized;
+    using System.Globalization;
+
+    using AspnetIdentitySample.Models;
+    using AspnetIdentitySample.Controllers;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    /// <summary>
+    /// Unit tests for account controller
+    /// </summary>
     [TestClass]
     public class AccountControllerTest
     {
+        /// <summary>
+        /// Tests the GET for register.
+        /// </summary>
         [TestMethod]
         public void TestRegisterGet()
         {
