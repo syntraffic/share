@@ -1,35 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin.Security;
-using AspnetIdentitySample.Models;
-using Owin;
-
-namespace AspnetIdentitySample.Controllers
+﻿namespace AspnetIdentitySample.Controllers
 {
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+
+    using AspnetIdentitySample.Models;
+    
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    
+    using Microsoft.Owin.Security;
+
+    /// <summary>
+    /// Account controller
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
     [Authorize]
     public class AccountController : Controller
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        /// </summary>
         public AccountController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new MyDbContext())))
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        /// </summary>
+        /// <param name="userManager">The user manager.</param>
         public AccountController(UserManager<ApplicationUser> userManager)
         {
             UserManager = userManager;
         }
 
+        /// <summary>
+        /// Gets the user manager.
+        /// </summary>
+        /// <value>
+        /// The user manager.
+        /// </value>
         public UserManager<ApplicationUser> UserManager { get; private set; }
 
         //
         // GET: /Account/Login
+        /// <summary>
+        /// Login action with a specified return URL.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -39,6 +60,12 @@ namespace AspnetIdentitySample.Controllers
 
         //
         // POST: /Account/Login
+        /// <summary>
+        /// Login action for the specified model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -64,6 +91,10 @@ namespace AspnetIdentitySample.Controllers
 
         //
         // GET: /Account/Register
+        /// <summary>
+        /// Register action.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -72,6 +103,11 @@ namespace AspnetIdentitySample.Controllers
 
         //
         // POST: /Account/Register
+        /// <summary>
+        /// Registers the specified model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -105,6 +141,12 @@ namespace AspnetIdentitySample.Controllers
 
         //
         // POST: /Account/Disassociate
+        /// <summary>
+        /// Disassociates the specified login provider.
+        /// </summary>
+        /// <param name="loginProvider">The login provider.</param>
+        /// <param name="providerKey">The provider key.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
@@ -124,6 +166,11 @@ namespace AspnetIdentitySample.Controllers
 
         //
         // GET: /Account/Manage
+        /// <summary>
+        /// Manage action wth an optional message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -139,6 +186,11 @@ namespace AspnetIdentitySample.Controllers
 
         //
         // POST: /Account/Manage
+        /// <summary>
+        /// Manage action for the specified model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Manage(ManageUserViewModel model)

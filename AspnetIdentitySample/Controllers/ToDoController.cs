@@ -1,22 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using AspnetIdentitySample.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-
-namespace AspnetIdentitySample.Controllers
+﻿namespace AspnetIdentitySample.Controllers
 {
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+
+    using AspnetIdentitySample.Models;
+
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+
+    /// <summary>
+    /// controller for todo actions
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
     [Authorize]
     public class ToDoController : Controller
     {
+        /// <summary> db context
+        /// </summary>
         private MyDbContext db;
+
+        /// <summary>
+        /// The application user manager
+        /// </summary>
         private UserManager<ApplicationUser> manager;
         public ToDoController()
         {
@@ -24,6 +32,11 @@ namespace AspnetIdentitySample.Controllers
             manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToDoController"/> class.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="userManager">The user manager.</param>
         public ToDoController(MyDbContext context, UserManager<ApplicationUser> userManager)
         {
             db = context;
@@ -32,6 +45,10 @@ namespace AspnetIdentitySample.Controllers
 
         // GET: /ToDo/
         // GET ToDo for the logged in user
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             var currentUser = manager.FindById(User.Identity.GetUserId());
@@ -39,6 +56,10 @@ namespace AspnetIdentitySample.Controllers
         }
 
         // GET: /ToDo/All
+        /// <summary>
+        /// Alls this instance.
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles="Admin")]
         public async Task<ActionResult> All()
         {
@@ -46,6 +67,11 @@ namespace AspnetIdentitySample.Controllers
         }
 
         // GET: /ToDo/Details/5
+        /// <summary>
+        /// Details of the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<ActionResult> Details(int? id)
         {
             var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId()); 
@@ -66,6 +92,10 @@ namespace AspnetIdentitySample.Controllers
         }
 
         // GET: /ToDo/Create
+        /// <summary>
+        /// Creates a new todo.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             return View();
@@ -74,6 +104,11 @@ namespace AspnetIdentitySample.Controllers
         // POST: /ToDo/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Creates the specified todo.
+        /// </summary>
+        /// <param name="todo">The todo.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include="Id,Description,IsDone")] ToDo todo)
@@ -91,6 +126,11 @@ namespace AspnetIdentitySample.Controllers
         }
 
         // GET: /ToDo/Edit/5
+        /// <summary>
+        /// Edits the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<ActionResult> Edit(int? id)
         {
             var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId()); 
@@ -113,6 +153,11 @@ namespace AspnetIdentitySample.Controllers
         // POST: /ToDo/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits the specified todo.
+        /// </summary>
+        /// <param name="todo">The todo.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include="Id,Description,IsDone")] ToDo todo)
@@ -133,6 +178,11 @@ namespace AspnetIdentitySample.Controllers
         }
 
         // GET: /ToDo/Delete/5
+        /// <summary>
+        /// Deletes the specified todo.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<ActionResult> Delete(int? id)
         {
             var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId()); 
@@ -153,6 +203,11 @@ namespace AspnetIdentitySample.Controllers
         }
 
         // POST: /ToDo/Delete/5
+        /// <summary>
+        /// Deletes the confirmed todo.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -163,6 +218,10 @@ namespace AspnetIdentitySample.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Releases unmanaged resources and optionally releases managed resources.
+        /// </summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
