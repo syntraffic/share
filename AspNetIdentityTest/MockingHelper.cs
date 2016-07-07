@@ -48,9 +48,9 @@
         private static string username = "help@syntraffic.com";
 
         /// <summary>
-        /// The application user
+        /// Initialize a default application user
         /// </summary>
-        private static ApplicationUser user = new ApplicationUser { Id = userId, UserName = username };
+        private static ApplicationUser user = new ApplicationUser { Id = userId, UserName = username, HomeTown = "Seattle", MyUserInfo = new MyUserInfo() { FirstName = "Syn", LastName = "Traffic", Id = 1 } };
 
         /// <summary>
         /// Gets the mocked database context.
