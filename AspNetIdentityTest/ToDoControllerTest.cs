@@ -140,6 +140,28 @@ namespace AspNetIdentityTest
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
         }
 
+        /// <summary>
+        /// Tests to do edit post with non existent identifier.
+        /// </summary>
+        [TestMethod]
+        public void TestToDoEditPostWithNonExistentId()
+        {
+            var controller = CreateToDoController();
+            var toDo = new ToDo { Id = 16, Description = "16th description", IsDone = false };
+            MockingHelper.AddToDo(toDo);
+
+            var result = controller.Edit(toDo.Id).Result;
+
+            var todoItem = (result as ViewResult).Model as ToDo;
+
+            var toDoWithInvalidId = new ToDo { Id = 1006, Description = "invalid id description", IsDone = false };
+            var postEditResult = controller.Edit(toDoWithInvalidId).Result;
+
+            var todoEditResult = (postEditResult as HttpStatusCodeResult);
+            Assert.IsNotNull(todoEditResult, "Expected return type as HttpStatusCodeResult is not found");
+            Assert.AreEqual(todoEditResult.StatusCode, HttpStatusCode.BadRequest, "Expected status code for BadRequest, but got " + todoEditResult.StatusCode);
+        }
+
         [TestMethod]
         public void TestToDoCreate()
         {
@@ -210,6 +232,32 @@ namespace AspNetIdentityTest
             Assert.AreEqual(toDo.Id, dataModel.Id);
         }
 
+        /// <summary>
+        /// Tests to do delete post.
+        /// </summary>
+        [TestMethod]
+        public void TestToDoDeletePost()
+        {
+            var controller = CreateToDoController();
+            var toDoToDelete = new ToDo { Id = 10, Description = "10th description", IsDone = false };
+            var toDoAdditional = new ToDo { Id = 11, Description = "11th description", IsDone = false };
+            MockingHelper.AddToDo(toDoToDelete);
+            MockingHelper.AddToDo(toDoAdditional);
+            
+            var result = controller.DeleteConfirmed(toDoToDelete.Id).Result;
+            
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+
+            Assert.IsFalse(MockingHelper.DBContext.ToDoes.Any(t => t.Id == toDoToDelete.Id), "Deleted to do item is still in the list");
+            Assert.IsTrue(MockingHelper.DBContext.ToDoes.Any(t => t.Id == toDoAdditional.Id), "Non-deleted item is missing from the list");
+        }
+
+        /// <summary>
+        /// Creates ToDo controller to help with mocking.
+        /// </summary>
+        /// <param name="ViewModel">The view model.</param>
+        /// <param name="isAuthorized">if set to <c>true</c> [is authorized].</param>
+        /// <returns></returns>
         private ToDoController CreateToDoController(object ViewModel = null, bool isAuthorized = true)
         {
             MockingHelper.InitMocking();

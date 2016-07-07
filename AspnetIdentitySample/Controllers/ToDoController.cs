@@ -26,6 +26,10 @@
         /// The application user manager
         /// </summary>
         private UserManager<ApplicationUser> manager;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToDoController"/> class.
+        /// </summary>
         public ToDoController()
         {
             db = new MyDbContext();
