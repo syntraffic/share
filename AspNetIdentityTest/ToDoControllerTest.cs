@@ -1,19 +1,24 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AspnetIdentitySample.Controllers;
-using System.Web.Mvc;
-using System.Collections.Specialized;
-using System.Globalization;
-using AspnetIdentitySample.Models;
-using AspnetIdentityTest;
-using System.Collections.Generic;
-using System.Linq;
-using Moq;
-using Microsoft.AspNet.Identity;
-using System.Net;
-
-namespace AspNetIdentityTest
+﻿namespace AspNetIdentityTest
 {
+    using AspnetIdentitySample.Controllers;
+    using AspnetIdentitySample.Models;
+    using AspnetIdentityTest;
+    
+    using Microsoft.AspNet.Identity;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    
+    using Moq;
+    
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Globalization;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+
+    /// <summary>
+    /// tests for todo controller
+    /// </summary>
     [TestClass]
     public class ToDoControllerTest
     {

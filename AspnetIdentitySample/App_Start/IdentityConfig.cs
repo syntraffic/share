@@ -1,17 +1,12 @@
-﻿using AspnetIdentitySample.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
-
-namespace AspnetIdentitySample
+﻿namespace AspnetIdentitySample
 {
+    using AspnetIdentitySample.Models;
+
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    
+    using System.Data.Entity;
+
     // This is useful if you do not want to tear down the database each time you run the application.
     // You want to create a new database if the Model changes
     // public class MyDbInitializer : DropCreateDatabaseIfModelChanges<MyDbContext>
