@@ -1,13 +1,15 @@
-﻿using AspnetIdentitySample.Models;
-using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-
-namespace AspnetIdentitySample.IdentityExtensions
+﻿namespace AspnetIdentitySample.IdentityExtensions
 {
+    using AspnetIdentitySample.Models;
+
+    using Microsoft.AspNet.Identity;
+    
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web;
+
     public class MyUserValidation : IIdentityValidator<ApplicationUser>
     {
         public System.Threading.Tasks.Task<IdentityResult> ValidateAsync(ApplicationUser item)
@@ -41,17 +43,15 @@ namespace AspnetIdentitySample.IdentityExtensions
         // If input password is foo then in the database it will be footestpranav
         public string HashPassword(string password)
         {
-            return password + "testpranav";
+            return password + "syntraffic";
         }
 
         public PasswordVerificationResult VerifyHashedPassword(string hashedPassword, string providedPassword)
         {
-            if (hashedPassword == providedPassword + "testpranav")
+            if (hashedPassword == providedPassword + "syntraffic")
                 return PasswordVerificationResult.Success;
             else
                 return PasswordVerificationResult.Failed;
         }
     }
-
-
 }

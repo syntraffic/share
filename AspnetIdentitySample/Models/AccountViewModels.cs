@@ -1,8 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace AspnetIdentitySample.Models 
+﻿namespace AspnetIdentitySample.Models 
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
+    /// <summary>
+    /// external login confirmation view model
+    /// </summary>
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -13,6 +16,9 @@ namespace AspnetIdentitySample.Models
         public string LoginProvider { get; set; }
     }
 
+    /// <summary>
+    /// user management view model
+    /// </summary>
     public class ManageUserViewModel
     {
         [Required]
@@ -32,6 +38,9 @@ namespace AspnetIdentitySample.Models
         public string ConfirmPassword { get; set; }
     }
 
+    /// <summary>
+    /// view model for login
+    /// </summary>
     public class LoginViewModel
     {
         [Required]
@@ -47,6 +56,9 @@ namespace AspnetIdentitySample.Models
         public bool RememberMe { get; set; }
     }
 
+    /// <summary>
+    /// view model for registration
+    /// </summary>
     public class RegisterViewModel
     {
         [Required]

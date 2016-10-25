@@ -22,7 +22,7 @@
         {
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var myinfo = new MyUserInfo() { FirstName = "Pranav", LastName = "Rastogi" };
+            var myinfo = new MyUserInfo() { FirstName = "Bill", LastName = "Gates" };
             string name = "Admin";
             string password = "123456";
             string test = "test";

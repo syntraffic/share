@@ -10,20 +10,48 @@
     using System.Linq;
     using System.Web;
 
+    /// <summary>
+    /// the application user
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNet.Identity.EntityFramework.IdentityUser" />
     public class ApplicationUser : IdentityUser
     {
         // HomeTown will be stored in the same table as Users
         public string HomeTown { get; set; }
+        
         public virtual ICollection<ToDo> ToDoes { get; set; }
   
         // FirstName & LastName will be stored in a different table called MyUserInfo
         public virtual MyUserInfo MyUserInfo { get; set; }
     }
 
+    /// <summary>
+    /// user info
+    /// </summary>
     public class MyUserInfo
     {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
         public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the first name.
+        /// </summary>
+        /// <value>
+        /// The first name.
+        /// </value>
         public string FirstName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last name.
+        /// </summary>
+        /// <value>
+        /// The last name.
+        /// </value>
         public string LastName { get; set; }
     }
 
